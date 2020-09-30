@@ -24,3 +24,23 @@ trashwheel_df =
          sports_balls = as.integer(sports_balls))
 ```
 
+Read and clean precipitation data for 2017
+```{r}
+precip_2017_df = 
+  read_excel("~/Desktop/Fall 2020/Data Science/Trash-Wheel-Collection-Totals-8-6-19.xlsx", 
+            sheet = "2017 Precipitation", 
+            range = "A2:B14") %>%
+  janitor::clean_names() %>%
+  mutate(year = 2017)
+```
+
+Read and clean precipitation data for 2018
+```{r}
+precip_2018_df = 
+  read_excel("~/Desktop/Fall 2020/Data Science/Trash-Wheel-Collection-Totals-8-6-19.xlsx", 
+            sheet = "2018 Precipitation", 
+            range = "A2:B14") %>%
+  janitor::clean_names() %>%
+  mutate(year = 2018)
+```
+
