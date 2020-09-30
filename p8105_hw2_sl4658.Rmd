@@ -85,3 +85,22 @@ I cleaned the variable names into a standard formal style, selected only the imp
 
 The data is not tidy, because the vending variable in the dataset still need to convert from character to logical (convert from YES vs NO to TRUE vs FALSE), and there are too many columns for routes that are redundant. 
 
+** Answers to the Homework Questions **
+```{r}
+dist_stat = distinct(nyc, station_name, line, .keep_all = TRUE)
+vending_wo = filter(nyc, vending == "NO")
+dist_stat
+```
+
+Question 1. 
+There are `r nrow(dist_stat)` distinct stations.
+
+Question 2. 
+The number of stations that are ADA compliant is `r nrow(filter(dist_stat, ada == "TRUE"))`.
+
+Question 3.
+The proportion of station entrances/exits without vending allow entrance is `r nrow(filter(vending_wo, entry == "TRUE"))/nrow(vending_wo)`. 
+
+
+
+
