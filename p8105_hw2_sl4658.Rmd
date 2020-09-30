@@ -9,3 +9,18 @@ output: html_document
 library(tidyverse)
 library(readxl)
 ```
+
+
+## Problem 1
+Read and clean the Mr. Trash Wheel dataset.
+```{r}
+trashwheel_df = 
+  read_excel("~/Desktop/Fall 2020/Data Science/Trash-Wheel-Collection-Totals-8-6-19.xlsx", 
+            sheet = "Mr. Trash Wheel", 
+            range = "A2:N408") %>%
+  janitor::clean_names() %>%
+  drop_na(dumpster) %>%
+  mutate(sports_balls = round(sports_balls),
+         sports_balls = as.integer(sports_balls))
+```
+
