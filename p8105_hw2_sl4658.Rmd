@@ -163,4 +163,13 @@ unemploy_df =
   mutate(year = as.integer(year)) 
 ```
 
+Merge all the dataset together
+```{r}
+merged_pols_snp = 
+  left_join(pols_month_df, snp_df, by = c("year", "month"))
+
+merged_pols_snp_unemploy = 
+  left_join(merged_pols_snp, unemploy_df, by = c("year", "month"))
+```
+
 
