@@ -102,5 +102,21 @@ Question 3.
 The proportion of station entrances/exits without vending allow entrance is `r nrow(filter(vending_wo, entry == "TRUE"))/nrow(vending_wo)`. 
 
 
+** Reformat the Data **
+```{r}
+dist_stat = 
+  dist_stat %>%
+  mutate_at(vars(route8:route11), as.character) %>%
+  pivot_longer(
+    route1:route11,
+    names_to = "Route_Number",
+    names_prefix = "Route",
+    values_to = "Train")
+```
+
+There are `r nrow(filter(Train == "A"), distinct(line, station_name))` distinct stations serve the A train. 
+
+Of the stations that serve the A train, there are `r nrow(filter(Train == "A", ada == "TRUE"), distinct(line, station_name))` ADA compliant stations.
+
 
 
