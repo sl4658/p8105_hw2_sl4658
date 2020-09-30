@@ -44,3 +44,25 @@ precip_2018_df =
   mutate(year = 2018)
 ```
 
+Combine precipitation datasets and convert month to a character variable
+```{r}
+month_df = tibble(month = 1:12,
+                  month_name = month.name)
+
+precip_comb = bind_rows(precip_2017_df,precip_2018_df)
+  
+precip_comb = 
+  left_join(precip_comb, month_df, by = "month")
+```
+
+
+There are `r nrow(trashwheel_df)` observations in the Mr. Trash Wheel dataset, and `r nrow(precip_comb)` observations in the combined precipitation dataset (2017 and 2018). 
+
+Some important variables in the Mr. Trash Wheel dataset include the dumpster site #, time information on trash collection (year, month and date), weight and volume of trash that was collected, and types and quantity of the trash. Some important variables in the combined precipitation dataset (2017 and 2018) include the month and year of the measurement on precipitation, and the total precipitation in that specific time measured in inches.
+
+The total precipitation in 2018 is `r sum(pull(precip_2018_df$total))` inches.
+
+The median number of sports balls in a dumpster in 2017 is `r median(pull(trashwheel_df$sports_balls), year = 2017)`.
+
+
+
