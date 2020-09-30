@@ -12,10 +12,15 @@ library(readxl)
 
 
 ## Problem 1
+Define the pathway to Mr. Trash Wheel dataset.
+```{r}
+path_trashwheel = "./Trash-Wheel-Collection-Totals-8-6-19.xlsx"
+```
+
 Read and clean the Mr. Trash Wheel dataset.
 ```{r}
 trashwheel_df = 
-  read_excel("~/Desktop/Fall 2020/Data Science/Trash-Wheel-Collection-Totals-8-6-19.xlsx", 
+  read_excel(path = path_trashwheel,  
             sheet = "Mr. Trash Wheel", 
             range = "A2:N408") %>%
   janitor::clean_names() %>%
@@ -27,7 +32,7 @@ trashwheel_df =
 Read and clean precipitation data for 2017
 ```{r}
 precip_2017_df = 
-  read_excel("~/Desktop/Fall 2020/Data Science/Trash-Wheel-Collection-Totals-8-6-19.xlsx", 
+  read_excel(path = path_trashwheel, 
             sheet = "2017 Precipitation", 
             range = "A2:B14") %>%
   janitor::clean_names() %>%
@@ -37,7 +42,7 @@ precip_2017_df =
 Read and clean precipitation data for 2018
 ```{r}
 precip_2018_df = 
-  read_excel("~/Desktop/Fall 2020/Data Science/Trash-Wheel-Collection-Totals-8-6-19.xlsx", 
+  read_excel(path = path_trashwheel, 
             sheet = "2018 Precipitation", 
             range = "A2:B14") %>%
   janitor::clean_names() %>%
@@ -69,10 +74,15 @@ The median number of sports balls in a dumpster in 2017 is `r median(filter(tras
 
 ## Problem 2
 
-Read and clean the NYC Transit data.
+Define the pathway to NYC Transit dataset.
+```{r}
+path_nyc = "./NYC_Transit_Subway_Entrance_And_Exit_Data.csv"
+```
+
+Read and clean the NYC Transit dataset.
 ```{r, message=FALSE}
 nyc = 
-  read_csv("~/Desktop/Fall 2020/Data Science/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
+  read_csv(path_nyc) %>%
   janitor::clean_names() %>%
   select(line:entry, vending, ada) 
   nyc$entry <- ifelse(nyc$entry == "YES", "TRUE",  "FALSE")
