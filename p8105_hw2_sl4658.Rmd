@@ -5,7 +5,7 @@ date: "9/30/2020"
 output: html_document
 ---
 
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 library(readxl)
 ```
@@ -136,7 +136,6 @@ pols_month_df =
   select(-c(prez_gop, prez_dem, day))
 ```
 
-
 Read and clean the snp data
 ```{r, message = FALSE}
 snp_df = 
@@ -152,6 +151,16 @@ snp_df =
   relocate(year, month)
 ```
 
-
+Tidy the unemployment data
+```{r, message = FALSE}
+unemploy_df = 
+  read_csv("~/Desktop/Fall 2020/Data Science/unemployment.csv") %>%
+  pivot_longer(
+    Jan:Dec,
+    names_to = "month",
+    values_to = "unemployment") %>%
+  janitor::clean_names() %>%
+  mutate(year = as.integer(year)) 
+```
 
 
