@@ -66,3 +66,22 @@ The median number of sports balls in a dumpster in 2017 is `r median(pull(trashw
 
 
 
+
+## Problem 2
+
+Read and clean the NYC Transit data.
+```{r, message=FALSE}
+nyc = 
+  read_csv("~/Desktop/Fall 2020/Data Science/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
+  janitor::clean_names() %>%
+  select(line:entry, vending, ada) 
+  nyc$entry <- ifelse(nyc$entry == "YES", "TRUE",  "FALSE")
+```
+** Description on Dataset **
+
+This dataset contains information on the NYC subway station's name, location, division and line, routes, entrance type and location, availability of vending machine, ADA compliance and staff-related information (staffing status and staff hours).
+
+I cleaned the variable names into a standard formal style, selected only the important variables according to the homework instruction, and converted the entry variable from character (Yes vs No) to a logical variable (True vs False). There are `r nrow(nyc)` rows and `r ncol(nyc)` columns in the dataset, the dimension of the dataset is `r nrow(nyc)*ncol(nyc)`.
+
+The data is not tidy, because the vending variable in the dataset still need to convert from character to logical (convert from YES vs NO to TRUE vs FALSE), and there are too many columns for routes that are redundant. 
+
