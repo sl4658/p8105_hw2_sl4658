@@ -173,3 +173,15 @@ merged_pols_snp_unemploy =
 ```
 
 
+** Paragraph description on the dataset **
+
+The pols_month dataset contains information on the number of national politicians (e.g.: governors, senators, representatives, president) who are democratic or republican at a specific time (year, month, day).
+
+The snp dataset contains information on observation of Standard&Poor's stock market index (S&P), including the date of observation (year, month, day) and the closing values of the S&P stock index on that date. 
+
+The unemployment dataset contains information on the percentage of unemployment at a specific time (year, month).
+
+The resulting merged dataset has `r nrow(merged_pols_snp_unemploy)` rows and `r ncol(merged_pols_snp_unemploy)` columns. The range of years in the merged dataset is from `r min(merged_pols_snp_unemploy$year)` to `r max(merged_pols_snp_unemploy$year)`. The full list of variables and their related information are listed in the table below: 
+`r summary(merged_pols_snp_unemploy)` 
+Some key variables in the merged dataset include the year and month of each observation, number of national politicians who are democratic or republican at that time, and the closing values of the S&P stock index on that time.
+
