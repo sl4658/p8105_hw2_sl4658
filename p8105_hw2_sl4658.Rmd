@@ -136,3 +136,22 @@ pols_month_df =
   select(-c(prez_gop, prez_dem, day))
 ```
 
+
+Read and clean the snp data
+```{r, message = FALSE}
+snp_df = 
+  read_csv("~/Desktop/Fall 2020/Data Science/snp.csv") %>%
+  janitor::clean_names() %>%
+  separate(date, into = c("month", "day", "year"), sep = "/") %>% 
+  mutate(year = as.integer(year),
+         month = as.integer(month),
+         day = as.integer(day))%>%
+  mutate(month = month.abb[month]) %>%
+  select(-day) %>%
+  arrange(year, month) %>%
+  relocate(year, month)
+```
+
+
+
+
