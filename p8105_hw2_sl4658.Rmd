@@ -2,7 +2,7 @@
 title: "p8105_hw2_sl4658"
 author: "Simin Ling"
 date: "9/30/2020"
-output: html_document
+output: github_document
 ---
 
 ```{r, message=FALSE}
@@ -60,9 +60,9 @@ There are `r nrow(trashwheel_df)` observations in the Mr. Trash Wheel dataset, a
 
 Some important variables in the Mr. Trash Wheel dataset include the dumpster site #, time information on trash collection (year, month and date), weight and volume of trash that was collected, and types and quantity of the trash. Some important variables in the combined precipitation dataset (2017 and 2018) include the month and year of the measurement on precipitation, and the total precipitation in that specific time measured in inches.
 
-The total precipitation in 2018 is `r sum(pull(precip_2018_df$total))` inches.
+The total precipitation in 2018 is `r sum(select(precip_2018_df, total))` inches.
 
-The median number of sports balls in a dumpster in 2017 is `r median(pull(trashwheel_df$sports_balls), year = 2017)`.
+The median number of sports balls in a dumpster in 2017 is `r median(filter(trashwheel_df, year == "2017")$sports_balls)`.
 
 
 
@@ -109,14 +109,14 @@ dist_stat =
   mutate_at(vars(route8:route11), as.character) %>%
   pivot_longer(
     route1:route11,
-    names_to = "Route_Number",
-    names_prefix = "Route",
-    values_to = "Train")
+    names_to = "route_name",
+    names_prefix = "route",
+    values_to = "route_number")
 ```
 
-There are `r nrow(filter(Train == "A"), distinct(line, station_name))` distinct stations serve the A train. 
+There are `r nrow(filter(dist_stat, route_number == "A"))` distinct stations serve the A train. 
 
-Of the stations that serve the A train, there are `r nrow(filter(Train == "A", ada == "TRUE"), distinct(line, station_name))` ADA compliant stations.
+Of the stations that serve the A train, there are `r nrow(filter(dist_stat, route_number == "A", ada == "TRUE"))` ADA compliant stations.
 
 
 
@@ -182,6 +182,10 @@ The snp dataset contains information on observation of Standard&Poor's stock mar
 The unemployment dataset contains information on the percentage of unemployment at a specific time (year, month).
 
 The resulting merged dataset has `r nrow(merged_pols_snp_unemploy)` rows and `r ncol(merged_pols_snp_unemploy)` columns. The range of years in the merged dataset is from `r min(merged_pols_snp_unemploy$year)` to `r max(merged_pols_snp_unemploy$year)`. The full list of variables and their related information are listed in the table below: 
-`r summary(merged_pols_snp_unemploy)` 
+
+```{r}
+summary(merged_pols_snp_unemploy)
+```
+
 Some key variables in the merged dataset include the year and month of each observation, number of national politicians who are democratic or republican at that time, and the closing values of the S&P stock index on that time.
 
